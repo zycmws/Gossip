@@ -23,7 +23,7 @@ package com.dongjinyong.gossip.net;
 
 import java.io.IOException;
 
-public interface MessageProducer
-{
-    public Message getMessage() throws IOException;
+public interface MessageProducer {
+
+  public Message getMessage() throws IOException;
 }

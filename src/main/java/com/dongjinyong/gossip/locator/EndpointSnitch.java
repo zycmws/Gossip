@@ -33,58 +33,56 @@ import com.dongjinyong.gossip.gms.VersionedValue;
  *
  * 2) Snitch will set the private IP as a Gossip application state.
  *
- * 3) Snitch implements IESCS and will reset the connection if it is within the
- * same region to communicate via private IP.
+ * 3) Snitch implements IESCS and will reset the connection if it is within the same region to
+ * communicate via private IP.
  *
- * Implements Ec2Snitch to inherit its functionality and extend it for
- * Multi-Region.
+ * Implements Ec2Snitch to inherit its functionality and extend it for Multi-Region.
  *
- * Operational: All the nodes in this cluster needs to be able to (modify the
- * Security group settings in AWS) communicate via Public IP's.
+ * Operational: All the nodes in this cluster needs to be able to (modify the Security group
+ * settings in AWS) communicate via Public IP's.
  */
 
 
 /***
  * jydong add
  */
-public class EndpointSnitch implements IEndpointStateChangeSubscriber
-{
+public class EndpointSnitch implements IEndpointStateChangeSubscriber {
 
-	@Override
-	public void onAlive(InetSocketAddress endpoint, EndpointState state) {
-		// TODO Auto-generated method stub
-		System.out.println("onAlive!"+endpoint);
-	}
+  @Override
+  public void onAlive(InetSocketAddress endpoint, EndpointState state) {
+    // TODO Auto-generated method stub
+    System.out.println("onAlive!" + endpoint);
+  }
 
-	@Override
-	public void onChange(InetSocketAddress endpoint, ApplicationState state,
-			VersionedValue value) {
-		// TODO Auto-generated method stub
-		System.out.println("onChange!"+endpoint);
-	}
+  @Override
+  public void onChange(InetSocketAddress endpoint, ApplicationState state,
+      VersionedValue value) {
+    // TODO Auto-generated method stub
+    System.out.println("onChange!" + endpoint);
+  }
 
-	@Override
-	public void onDead(InetSocketAddress endpoint, EndpointState state) {
-		// TODO Auto-generated method stub
-		System.out.println("onDead!"+endpoint);
-	}
+  @Override
+  public void onDead(InetSocketAddress endpoint, EndpointState state) {
+    // TODO Auto-generated method stub
+    System.out.println("onDead!" + endpoint);
+  }
 
-	@Override
-	public void onJoin(InetSocketAddress endpoint, EndpointState epState) {
-		// TODO Auto-generated method stub
-		System.out.println("onJoin!"+endpoint);
-	}
+  @Override
+  public void onJoin(InetSocketAddress endpoint, EndpointState epState) {
+    // TODO Auto-generated method stub
+    System.out.println("onJoin!" + endpoint);
+  }
 
-	@Override
-	public void onRemove(InetSocketAddress endpoint) {
-		// TODO Auto-generated method stub
-		System.out.println("onRemove!"+endpoint);
-	}
+  @Override
+  public void onRemove(InetSocketAddress endpoint) {
+    // TODO Auto-generated method stub
+    System.out.println("onRemove!" + endpoint);
+  }
 
-	@Override
-	public void onRestart(InetSocketAddress endpoint, EndpointState state) {
-		// TODO Auto-generated method stub
-		System.out.println("onRestart!"+endpoint);
-	}
+  @Override
+  public void onRestart(InetSocketAddress endpoint, EndpointState state) {
+    // TODO Auto-generated method stub
+    System.out.println("onRestart!" + endpoint);
+  }
 
 }

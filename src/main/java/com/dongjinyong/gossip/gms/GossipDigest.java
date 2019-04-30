@@ -1,19 +1,16 @@
 /**
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ * agreements.  See the NOTICE file distributed with this work for additional information regarding
+ * copyright ownership.  The ASF licenses this file to you under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with the License.  You may obtain
+ * a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.dongjinyong.gossip.gms;
@@ -29,83 +26,74 @@ import com.dongjinyong.gossip.net.CompactEndpointSerializationHelper;
  * of the state they have generated as known by the local endpoint.
  */
 
-public class GossipDigest implements Comparable<GossipDigest>
-{
-    private static IVersionedSerializer<GossipDigest> serializer;
-    static
-    {
-        serializer = new GossipDigestSerializer();
-    }
+public class GossipDigest implements Comparable<GossipDigest> {
 
-    InetSocketAddress endpoint;
-    int generation;
-    int maxVersion;
+  private static IVersionedSerializer<GossipDigest> serializer;
 
-    public static IVersionedSerializer<GossipDigest> serializer()
-    {
-        return serializer;
-    }
+  static {
+    serializer = new GossipDigestSerializer();
+  }
 
-    GossipDigest(InetSocketAddress ep, int gen, int version)
-    {
-        endpoint = ep;
-        generation = gen;
-        maxVersion = version;
-    }
+  InetSocketAddress endpoint;
+  int generation;
+  int maxVersion;
 
-    InetSocketAddress getEndpoint()
-    {
-        return endpoint;
-    }
+  public static IVersionedSerializer<GossipDigest> serializer() {
+    return serializer;
+  }
 
-    int getGeneration()
-    {
-        return generation;
-    }
+  GossipDigest(InetSocketAddress ep, int gen, int version) {
+    endpoint = ep;
+    generation = gen;
+    maxVersion = version;
+  }
 
-    int getMaxVersion()
-    {
-        return maxVersion;
-    }
+  InetSocketAddress getEndpoint() {
+    return endpoint;
+  }
 
-    public int compareTo(GossipDigest gDigest)
-    {
-        if ( generation != gDigest.generation )
-            return ( generation - gDigest.generation );
-        return (maxVersion - gDigest.maxVersion);
-    }
+  int getGeneration() {
+    return generation;
+  }
 
-    public String toString()
-    {
-        StringBuilder sb = new StringBuilder();
-        sb.append(endpoint);
-        sb.append(":");
-        sb.append(generation);
-        sb.append(":");
-        sb.append(maxVersion);
-        return sb.toString();
+  int getMaxVersion() {
+    return maxVersion;
+  }
+
+  public int compareTo(GossipDigest gDigest) {
+    if (generation != gDigest.generation) {
+      return (generation - gDigest.generation);
     }
+    return (maxVersion - gDigest.maxVersion);
+  }
+
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(endpoint);
+    sb.append(":");
+    sb.append(generation);
+    sb.append(":");
+    sb.append(maxVersion);
+    return sb.toString();
+  }
 }
 
-class GossipDigestSerializer implements IVersionedSerializer<GossipDigest>
-{
-    public void serialize(GossipDigest gDigest, DataOutput dos) throws IOException
-    {
-        CompactEndpointSerializationHelper.serialize(gDigest.endpoint, dos);
-        dos.writeInt(gDigest.generation);
-        dos.writeInt(gDigest.maxVersion);
-    }
+class GossipDigestSerializer implements IVersionedSerializer<GossipDigest> {
 
-    public GossipDigest deserialize(DataInput dis) throws IOException
-    {
-    	InetSocketAddress endpoint = CompactEndpointSerializationHelper.deserialize(dis);
-        int generation = dis.readInt();
-        int maxVersion = dis.readInt();
-        return new GossipDigest(endpoint, generation, maxVersion);
-    }
+  public void serialize(GossipDigest gDigest, DataOutput dos) throws IOException {
+    CompactEndpointSerializationHelper.serialize(gDigest.endpoint, dos);
+    dos.writeInt(gDigest.generation);
+    dos.writeInt(gDigest.maxVersion);
+  }
 
-    public long serializedSize(GossipDigest gossipDigest)
-    {
-        throw new UnsupportedOperationException();
-    }
+  public GossipDigest deserialize(DataInput dis) throws IOException {
+    InetSocketAddress endpoint = CompactEndpointSerializationHelper.deserialize(dis);
+    int generation = dis.readInt();
+    int maxVersion = dis.readInt();
+    return new GossipDigest(endpoint, generation, maxVersion);
+  }
+
+  public long serializedSize(GossipDigest gossipDigest) {
+    throw new UnsupportedOperationException();
+  }
 }

@@ -27,37 +27,32 @@ import java.io.IOException;
  * This message indicates the gossiper is shutting down
  */
 
-class GossipShutdownMessage
-{
-    private static final IVersionedSerializer<GossipShutdownMessage> serializer;
-    static
-    {
-        serializer = new GossipShutdownMessageSerializer();
-    }
+class GossipShutdownMessage {
 
-    static IVersionedSerializer<GossipShutdownMessage> serializer()
-    {
-        return serializer;
-    }
+  private static final IVersionedSerializer<GossipShutdownMessage> serializer;
 
-    GossipShutdownMessage()
-    {
-    }
+  static {
+    serializer = new GossipShutdownMessageSerializer();
+  }
+
+  static IVersionedSerializer<GossipShutdownMessage> serializer() {
+    return serializer;
+  }
+
+  GossipShutdownMessage() {
+  }
 }
 
-class GossipShutdownMessageSerializer implements IVersionedSerializer<GossipShutdownMessage>
-{
-    public void serialize(GossipShutdownMessage gShutdownMessage, DataOutput dos) throws IOException
-    {
-    }
+class GossipShutdownMessageSerializer implements IVersionedSerializer<GossipShutdownMessage> {
 
-    public GossipShutdownMessage deserialize(DataInput dis) throws IOException
-    {
-        return new GossipShutdownMessage();
-    }
+  public void serialize(GossipShutdownMessage gShutdownMessage, DataOutput dos) throws IOException {
+  }
 
-    public long serializedSize(GossipShutdownMessage gossipShutdownMessage)
-    {
-        throw new UnsupportedOperationException();
-    }
+  public GossipShutdownMessage deserialize(DataInput dis) throws IOException {
+    return new GossipShutdownMessage();
+  }
+
+  public long serializedSize(GossipShutdownMessage gossipShutdownMessage) {
+    throw new UnsupportedOperationException();
+  }
 }

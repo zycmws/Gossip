@@ -34,54 +34,52 @@ import com.dongjinyong.gossip.net.MessagingService;
  *
  * 2) Snitch will set the private IP as a Gossip application state.
  *
- * 3) Snitch implements IESCS and will reset the connection if it is within the
- * same region to communicate via private IP.
+ * 3) Snitch implements IESCS and will reset the connection if it is within the same region to
+ * communicate via private IP.
  *
- * Implements Ec2Snitch to inherit its functionality and extend it for
- * Multi-Region.
+ * Implements Ec2Snitch to inherit its functionality and extend it for Multi-Region.
  *
- * Operational: All the nodes in this cluster needs to be able to (modify the
- * Security group settings in AWS) communicate via Public IP's.
+ * Operational: All the nodes in this cluster needs to be able to (modify the Security group
+ * settings in AWS) communicate via Public IP's.
  */
 
 
 /***
  * jydong add
  */
-public class NetSnitch implements IEndpointStateChangeSubscriber
-{
+public class NetSnitch implements IEndpointStateChangeSubscriber {
 
-	@Override
-	public void onAlive(InetSocketAddress endpoint, EndpointState state) {
-		// TODO Auto-generated method stub
-	}
+  @Override
+  public void onAlive(InetSocketAddress endpoint, EndpointState state) {
+    // TODO Auto-generated method stub
+  }
 
-	@Override
-	public void onChange(InetSocketAddress endpoint, ApplicationState state,
-			VersionedValue value) {
-		// TODO Auto-generated method stub
-	}
+  @Override
+  public void onChange(InetSocketAddress endpoint, ApplicationState state,
+      VersionedValue value) {
+    // TODO Auto-generated method stub
+  }
 
-	@Override
-	public void onDead(InetSocketAddress endpoint, EndpointState state) {
-		// TODO Auto-generated method stub
-		MessagingService.instance().convict(endpoint);  //关闭发送消息的socket连接
-	}
+  @Override
+  public void onDead(InetSocketAddress endpoint, EndpointState state) {
+    // TODO Auto-generated method stub
+    MessagingService.instance().convict(endpoint);  //关闭发送消息的socket连接
+  }
 
-	@Override
-	public void onJoin(InetSocketAddress endpoint, EndpointState epState) {
-		// TODO Auto-generated method stub
-	}
+  @Override
+  public void onJoin(InetSocketAddress endpoint, EndpointState epState) {
+    // TODO Auto-generated method stub
+  }
 
-	@Override
-	public void onRemove(InetSocketAddress endpoint) {
-		// TODO Auto-generated method stub
-		MessagingService.instance().convict(endpoint);  //关闭发送消息的socket连接
-	}
+  @Override
+  public void onRemove(InetSocketAddress endpoint) {
+    // TODO Auto-generated method stub
+    MessagingService.instance().convict(endpoint);  //关闭发送消息的socket连接
+  }
 
-	@Override
-	public void onRestart(InetSocketAddress endpoint, EndpointState state) {
-		// TODO Auto-generated method stub
-	}
+  @Override
+  public void onRestart(InetSocketAddress endpoint, EndpointState state) {
+    // TODO Auto-generated method stub
+  }
 
 }

@@ -1,19 +1,16 @@
 /**
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ * agreements.  See the NOTICE file distributed with this work for additional information regarding
+ * copyright ownership.  The ASF licenses this file to you under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with the License.  You may obtain
+ * a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.dongjinyong.gossip.gms;
@@ -29,30 +26,30 @@ import java.net.InetSocketAddress;
  * in all state changes.
  */
 
-public interface IEndpointStateChangeSubscriber
-{
-    /**
-     * Use to inform interested parties about the change in the state
-     * for specified endpoint
-     *
-     * @param endpoint endpoint for which the state change occurred.
-     * @param epState state that actually changed for the above endpoint.
-     */
-    public void onJoin(InetSocketAddress endpoint, EndpointState epState);
+public interface IEndpointStateChangeSubscriber {
 
-    public void onChange(InetSocketAddress endpoint, ApplicationState state, VersionedValue value);
+  /**
+   * Use to inform interested parties about the change in the state
+   * for specified endpoint
+   *
+   * @param endpoint endpoint for which the state change occurred.
+   * @param epState state that actually changed for the above endpoint.
+   */
+  public void onJoin(InetSocketAddress endpoint, EndpointState epState);
 
-    public void onAlive(InetSocketAddress endpoint, EndpointState state);
+  public void onChange(InetSocketAddress endpoint, ApplicationState state, VersionedValue value);
 
-    public void onDead(InetSocketAddress endpoint, EndpointState state);
+  public void onAlive(InetSocketAddress endpoint, EndpointState state);
 
-    public void onRemove(InetSocketAddress endpoint);
+  public void onDead(InetSocketAddress endpoint, EndpointState state);
 
-    /**
-     * Called whenever a node is restarted.
-     * Note that there is no guarantee when that happens that the node was
-     * previously marked down. It will have only if {@code state.isAlive() == false}
-     * as {@code state} is from before the restarted node is marked up.
-     */
-    public void onRestart(InetSocketAddress endpoint, EndpointState state);
+  public void onRemove(InetSocketAddress endpoint);
+
+  /**
+   * Called whenever a node is restarted.
+   * Note that there is no guarantee when that happens that the node was
+   * previously marked down. It will have only if {@code state.isAlive() == false}
+   * as {@code state} is from before the restarted node is marked up.
+   */
+  public void onRestart(InetSocketAddress endpoint, EndpointState state);
 }

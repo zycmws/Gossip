@@ -21,9 +21,8 @@ package com.dongjinyong.gossip.gms;
  */
 
 
-public enum ApplicationState
-{
-    STATUS,
-    LOAD,
-    WEIGHT, //权重
+public enum ApplicationState {
+  STATUS,
+  LOAD,
+  WEIGHT, //权重
 }

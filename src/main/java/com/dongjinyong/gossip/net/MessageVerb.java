@@ -8,16 +8,15 @@ package com.dongjinyong.gossip.net;
  *
  */
 public class MessageVerb {
-    
-    /* All verb handler identifiers */
-    public enum Verb
-    {
-    	GOSSIP_DIGEST_SYN,
-    	GOSSIP_DIGEST_ACK,
-    	GOSSIP_DIGEST_ACK2,
-    	GOSSIP_SHUTDOWN,
-    	INTERNAL_RESPONSE, // responses to internal calls
-    	INTERNAL_SHUTDOWN, // 关闭
+
+  /* All verb handler identifiers */
+  public enum Verb {
+    GOSSIP_DIGEST_SYN,
+    GOSSIP_DIGEST_ACK,
+    GOSSIP_DIGEST_ACK2,
+    GOSSIP_SHUTDOWN,
+    INTERNAL_RESPONSE, // responses to internal calls
+    INTERNAL_SHUTDOWN, // 关闭
 //    	REQUEST_RESPONSE, // client-initiated reads and writes
 //        MUTATION,
 //        BINARY, // Deprecated
@@ -47,10 +46,11 @@ public class MessageVerb {
 //        UNUSED_1,
 //        UNUSED_2,
 //        UNUSED_3,
-        ;
-        // remember to add new verbs at the end, since we serialize by ordinal
-    }
-    public static final Verb[] VERBS = Verb.values();
+    ;
+    // remember to add new verbs at the end, since we serialize by ordinal
+  }
+
+  public static final Verb[] VERBS = Verb.values();
 
 
 }

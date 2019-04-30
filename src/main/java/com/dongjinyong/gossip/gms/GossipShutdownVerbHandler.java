@@ -25,19 +25,17 @@ import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
 
-public class GossipShutdownVerbHandler implements IVerbHandler
-{
-    private static final Logger logger = LoggerFactory.getLogger(GossipShutdownVerbHandler.class);
+public class GossipShutdownVerbHandler implements IVerbHandler {
 
-    public void doVerb(Message message, String id)
-    {
-    	InetSocketAddress from = message.getFrom();
-        if (!Gossiper.instance.isEnabled())
-        {
-            logger.debug("Ignoring shutdown message from {} because gossip is disabled", from);
-            return;
-        }
-        FailureDetector.instance.forceConviction(from);
+  private static final Logger logger = LoggerFactory.getLogger(GossipShutdownVerbHandler.class);
+
+  public void doVerb(Message message, String id) {
+    InetSocketAddress from = message.getFrom();
+    if (!Gossiper.instance.isEnabled()) {
+      logger.debug("Ignoring shutdown message from {} because gossip is disabled", from);
+      return;
     }
-    
+    FailureDetector.instance.forceConviction(from);
+  }
+
 }

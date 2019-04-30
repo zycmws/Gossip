@@ -25,23 +25,23 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public interface IVersionedSerializer<T>
-{
-    /**
-     * Serialize the specified type into the specified DataOutputStream instance.
-     * @param t type that needs to be serialized
-     * @param dos DataOutput into which serialization needs to happen.
-     * @throws java.io.IOException
-     */
-    public void serialize(T t, DataOutput dos) throws IOException;
+public interface IVersionedSerializer<T> {
 
-    /**
-     * Deserialize into the specified DataInputStream instance.
-     * @param dis DataInput from which deserialization needs to happen.
-     * @throws IOException
-     * @return the type that was deserialized
-     */
-    public T deserialize(DataInput dis) throws IOException;
+  /**
+   * Serialize the specified type into the specified DataOutputStream instance.
+   *
+   * @param t type that needs to be serialized
+   * @param dos DataOutput into which serialization needs to happen.
+   */
+  public void serialize(T t, DataOutput dos) throws IOException;
 
-    public long serializedSize(T t);
+  /**
+   * Deserialize into the specified DataInputStream instance.
+   *
+   * @param dis DataInput from which deserialization needs to happen.
+   * @return the type that was deserialized
+   */
+  public T deserialize(DataInput dis) throws IOException;
+
+  public long serializedSize(T t);
 }

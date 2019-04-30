@@ -33,32 +33,28 @@ import com.dongjinyong.gossip.io.util.FastByteArrayInputStream;
 import com.dongjinyong.gossip.net.IVerbHandler;
 import com.dongjinyong.gossip.net.Message;
 
-public class GossipDigestAck2VerbHandler implements IVerbHandler
-{
-    private static Logger logger_ = LoggerFactory.getLogger(GossipDigestAck2VerbHandler.class);
+public class GossipDigestAck2VerbHandler implements IVerbHandler {
 
-    public void doVerb(Message message, String id)
-    {
-        if (logger_.isTraceEnabled())
-        {
-        	InetSocketAddress from = message.getFrom();
-            logger_.trace("Received a GossipDigestAck2Message from {}", from);
-        }
+  private static Logger logger_ = LoggerFactory.getLogger(GossipDigestAck2VerbHandler.class);
 
-        byte[] bytes = message.getMessageBody();
-        DataInputStream dis = new DataInputStream( new FastByteArrayInputStream(bytes) );
-        GossipDigestAck2Message gDigestAck2Message;
-        try
-        {
-            gDigestAck2Message = GossipDigestAck2Message.serializer().deserialize(dis);
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
-        Map<InetSocketAddress, EndpointState> remoteEpStateMap = gDigestAck2Message.getEndpointStateMap();
-        /* Notify the Failure Detector */
-        Gossiper.instance.notifyFailureDetector(remoteEpStateMap);
-        Gossiper.instance.applyStateLocally(remoteEpStateMap);
+  public void doVerb(Message message, String id) {
+    if (logger_.isTraceEnabled()) {
+      InetSocketAddress from = message.getFrom();
+      logger_.trace("Received a GossipDigestAck2Message from {}", from);
     }
+
+    byte[] bytes = message.getMessageBody();
+    DataInputStream dis = new DataInputStream(new FastByteArrayInputStream(bytes));
+    GossipDigestAck2Message gDigestAck2Message;
+    try {
+      gDigestAck2Message = GossipDigestAck2Message.serializer().deserialize(dis);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    Map<InetSocketAddress, EndpointState> remoteEpStateMap = gDigestAck2Message
+        .getEndpointStateMap();
+    /* Notify the Failure Detector */
+    Gossiper.instance.notifyFailureDetector(remoteEpStateMap);
+    Gossiper.instance.applyStateLocally(remoteEpStateMap);
+  }
 }
